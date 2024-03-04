@@ -1,3 +1,0 @@
-Aspirin,100,45.0
-Paracetamol,50,23.0
-Ibuprofen,25,25.0
