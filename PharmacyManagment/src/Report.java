@@ -7,10 +7,4 @@ public abstract class Report {
         this.sales = sales;
     }
     public abstract void generateReport();
-    public void generateTotalQuantityReport() {
-        for (Sale sale : sales) {
-            System.out.println("Item: " + sale.getitemName() + ", Total Quantity Sold: " + sale.getquantity() + " on " + sale.getsaleDate());
-        }
-        System.out.println("***************************\n");
-    }
 }

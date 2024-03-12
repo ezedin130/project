@@ -5,10 +5,10 @@ public class PharmacyManagment {
     public static void main(String[] args) {
         Pharmacy pharmacy = new Pharmacy();
          Scanner scanner = new Scanner(System.in);
-            
-            /*pharmacy.addItem(new Item("Aspirin", 100, 45.00));
-            pharmacy.addItem(new Item("Paracetamol", 50, 23.00));
-            pharmacy.addItem(new Item("Ibuprofen",25,25.0));*/
+
+           /* pharmacy.addItem(new Item(1,"Aspirin", 100, 45.00,"2025-01-30"));
+            pharmacy.addItem(new Item(2,"Paracetamol", 50, 23.00,"2026-01-30"));
+            pharmacy.addItem(new Item(3,"Ibuprofen",25,25.0,"2024-12-01"));*/
             try{
             while (true) {
                 System.out.println("\n***************************\n");
@@ -18,28 +18,30 @@ public class PharmacyManagment {
                 System.out.println("3. Display Sales");
                 System.out.println("4. Display sales report");
                 System.out.println("5. Purchase item");
-                System.out.println("6. Exit");
+                System.out.println("6. Remove item");
+                System.out.println("7. Search item");
+                System.out.println("8. Exit ");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
                 switch (choice) {
                     case 1:
-                        System.out.print("Enter item name to sell: ");
-                        String itemName = scanner.nextLine();
+                        System.out.print("Enter the item key to sell: ");
+                        int itemKey = scanner.nextInt();
                         boolean itemexists = false;
                         for(Item item : pharmacy.getinventory()){
-                            if(item.getName().equals(itemName)){
+                            if(item.getKey() == itemKey){
                                 itemexists = true;
                             }
                         }
                         if(itemexists == true ){
                             System.out.print("Enter quantity to sell: ");
                             int quantity = scanner.nextInt();
-                            pharmacy.sellItem(itemName, quantity);
+                            pharmacy.sellItem(itemKey, quantity);
                             pharmacy.writeReports();
                         }
                         else{
-                            System.out.println(itemName + "  doesn't exist here ");
+                            System.out.println(itemKey + "  doesn't exist here ");
                         }
                         break;
                     case 2:
@@ -54,12 +56,24 @@ public class PharmacyManagment {
                     case 5:
                     System.out.print("Enter item name to purchase: ");
                     String itemNameToPurchase = scanner.nextLine();
-                    Item purchaseItem = new Item(itemNameToPurchase, 0, 0.0);
+                    Item purchaseItem = new Item(0,itemNameToPurchase, 0, 0.0, null);
                     System.out.print("Enter quantity to purchase: ");
                     int purchaseQuantity = scanner.nextInt();
                     pharmacy.purchaseItem(purchaseItem, purchaseQuantity);
                     break;
                     case 6:
+                    System.out.println("Enter the item key to remove");
+                    int Key = scanner.nextInt();
+                    pharmacy.removeItem(Key);
+                    break;
+
+                    case 7:
+                    
+                    System.out.println("Enter the name of the item you want to search");
+                    String itemName = scanner.nextLine();
+                    pharmacy.search(itemName);
+                    break;    
+                    case 8:
                     pharmacy.writeData();
                     System.out.println("Exiting...");
                     System.exit(0);
